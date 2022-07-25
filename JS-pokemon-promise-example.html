@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Promises</title>
+</head>
+<body>
+
+    <h1>Nothing to see here!</h1>
+    <h2>Open up the console => </h2>
+  
+  <script>
+
+    const pokemonURL = 'https://pokeapi.co/api/v2/pokemon/1/';
+
+    fetch(pokemonURL)
+      .then( (res) => {
+        return res.json();
+      })
+      .then( (jsonData) => {
+        console.log(jsonData);
+      });
+
+    console.log('I am not waiting for the API!');
+
+  </script>
+</body>
+</html>
