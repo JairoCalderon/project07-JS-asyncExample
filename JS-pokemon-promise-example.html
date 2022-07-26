@@ -1,28 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>JavaScript Promises</title>
 </head>
+
 <body>
 
-    <h1>Nothing to see here!</h1>
-    <h2>Open up the console => </h2>
-  
+  <h1>Nothing to see here!</h1>
+  <h2>Open up the console => </h2>
+
   <script>
 
     const pokemonURL = 'https://pokeapi.co/api/v2/pokemon/1/';
 
-    fetch(pokemonURL)
-      .then( (res) => {
-        return res.json();
-      })
-      .then( (jsonData) => {
-        console.log(jsonData);
-      });
+    // const myPromise = fetch(pokemonURL);
 
-    console.log('I am not waiting for the API!');
+    // myPromise.then((res) => {
+    //   return res.json();
+    // })
+    //   .then((jsonData) => {
+    //     console.log(jsonData);
+    //   });
+
+    // console.log('I am not waiting for the API!');
+
+
+    //Async and await f(x):
+    // async function getPokemon() {
+    //   const myResponse = await fetch(pokemonURL);
+    //   const myData = await myResponse.json();
+
+    //   return myData
+    // }
+
+    // const pokeResult = getPokemon();
+    // pokeResult.then(res => console.log(res))
+
+
+
+    /////promise.all()//
+    // const urls = ["https://pokeapi.co/api/v2/pokemon/1/", "https://pokeapi.co/api/v2/pokemon/2/"];
+
+    // const pokePromises = urls.map((url) => {
+    //   return fetch(url).then((res) => { return res.json() }).then((data) => { return data });
+    // });
+
+    // Promise.all(pokePromises).then((res) => console.log(res)).catch((err) => console.log("oh noooo error:", err))
+
+
+    /////fetching more than 2 pokemons//
+    function getPokemon(number) {
+      return fetch(`https://pokeapi.co/api/v2/pokemon/${number}/`).then((res) => res.json())
+    };
+
+    const bag = [];
+
+    for (let i = 1; i <= 40; i++) {
+      bag.push(i)
+    };
+
+
+    const multiplePokePromises = bag.map((pokemonNum) => {
+      return getPokemon(pokemonNum)
+    });
+
+    Promise.all(multiplePokePromises).then(pokemon => console.log(pokemon))
+
+
+
+
 
   </script>
 </body>
+
 </html>
